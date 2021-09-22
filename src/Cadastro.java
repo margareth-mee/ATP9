@@ -110,8 +110,8 @@ public class Cadastro {
         do{
             opcao = lerNumero(mensagem);
         } while(!validaAplicacao(opcao));
-        String aplicacao = nomeAplicacao;
-        return aplicacao;
+
+        return nomeAplicacao;
     }
 
     static String lerOpcaoSenioridade(String mensagem){
@@ -119,8 +119,8 @@ public class Cadastro {
         do{
             opcao = lerNumero(mensagem);
         } while(!validaSenioridade(opcao));
-        String senioridade = nomeSenioridade;
-        return senioridade;
+
+        return nomeSenioridade;
     }
 
     static boolean validaNome(String nome) {
