@@ -20,11 +20,13 @@ public class Cadastro {
         lerOpcaoMenu("Digite uma opção: ");
     }
 
+    //método que imprime um cabeçalho
     static void imprimeCabecalho(){
         System.out.println("********** CADASTRO DE APLICAÇÕES **********");
         System.out.println("\nOlá! Seja bem vindo(a) ao cadastro de aplicações!\n");
     }
 
+    //método que lê um número
     static int lerNumero(String mensagem){
         int numero;
 
@@ -36,6 +38,7 @@ public class Cadastro {
         return numero;
     }
 
+    //método que lê uma string
     static String lerString(String mensagem){
         String cadeia;
         do{
@@ -46,6 +49,7 @@ public class Cadastro {
         return cadeia;
     }
 
+    //método que recebe a opção do menu e executa a opção, caso ela seja válida
     static boolean escolheMenu(int opcao){
         boolean valida = true;
 
@@ -67,19 +71,21 @@ public class Cadastro {
         return valida;
     }
 
+    //método que cadastra um(a) desenvolvedor(a)
     static void cadastrarDev(){
-        System.out.println("********** CADASTRO DE DESENVOLVEDOR **********");
-        String nome = lerString("Digite o nome do DEV: ");
-        String sobrenome = lerString("Digite o sobrenome do DEV: ");
+        System.out.println("********** CADASTRO DE DESENVOLVEDOR(A) **********");
+        String nome = lerString("Digite o nome do(a) DEV: ");
+        String sobrenome = lerString("Digite o sobrenome do(a) DEV: ");
         exibeOpcoes("Senioridade", "Junior","Pleno","Senior");
         String senioridade = lerOpcaoSenioridade("Digite a senioridade: ");
         int idade = lerNumero("Digite a idade: ");
 
-        System.out.println("DESENVOLVEDOR CADASTRADO!");
+        System.out.println("DESENVOLVEDOR(A) CADASTRADO!");
         System.out.printf("\t == Usuario: %s \t == Sobrenome: %s \t == SENIORIDADE: %s \t == IDADE: %d",nome,sobrenome,senioridade,idade);
 
     }
 
+    //método que cadastra uma linguagem de programação
     static void cadastrarLinguagem(){
         System.out.println("********** CADASTRO DE LINGUAGEM **********");
         String nome = lerString("Digite o nome da linguagem: ");
@@ -92,12 +98,15 @@ public class Cadastro {
 
     }
 
+    //método que exibe um menu de opções
     static void exibeOpcoes(String cadeia1, String cadeia2, String cadeia3, String cadeia4){
         System.out.println("Opções de " + cadeia1 + ": ");
         System.out.println("1 - " + cadeia2);
         System.out.println("2 - " + cadeia3);
         System.out.println("3 - " + cadeia4);
     }
+
+    //método que lê a opção do menu e a executa, caso seja uma opção valida
     static void lerOpcaoMenu(String mensagem){
         int opcao;
         do{
@@ -105,6 +114,7 @@ public class Cadastro {
         } while(!escolheMenu(opcao));
     }
 
+    //método que lê a aplicação, valida e retorna seu valor
     static String lerOpcaoAplicacao(String mensagem){
         int opcao;
         do{
@@ -114,6 +124,7 @@ public class Cadastro {
         return nomeAplicacao;
     }
 
+    //método que lê a senioridade, valida e retorna seu valor
     static String lerOpcaoSenioridade(String mensagem){
         int opcao;
         do{
@@ -123,6 +134,7 @@ public class Cadastro {
         return nomeSenioridade;
     }
 
+    //metodo que valida se a string tem mais que 3 caracteres
     static boolean validaNome(String nome) {
         boolean valida = true;
 
@@ -135,10 +147,11 @@ public class Cadastro {
         return valida;
     }
 
-    static boolean validaNumero(int idade) {
+    //método que valida o número informado pelo usuário (não permite valores negativos)
+    static boolean validaNumero(int numero) {
         boolean valida = true;
 
-        if (idade <= 0) {
+        if (numero <= 0) {
             System.out.println("O valor dever ser maior que zero, tente novamente!");
             valida = false;
         } else {
@@ -147,6 +160,7 @@ public class Cadastro {
         return valida;
     }
 
+    //método que valida a opção informada pelo usuário e atribui o nome da aplicação
     static boolean validaAplicacao(int aplicacao) {
         boolean valida = true;
 
@@ -168,10 +182,11 @@ public class Cadastro {
         return valida;
     }
 
-    static boolean validaSenioridade(int aplicacao) {
+    //método que valida a opção informada pelo usuário e atribui o nome da senioridade
+    static boolean validaSenioridade(int senioridade) {
         boolean valida = true;
 
-        switch (aplicacao) {
+        switch (senioridade) {
             case 1:
                 nomeSenioridade = "Junior";
                 break;
