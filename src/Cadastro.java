@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class Cadastro {
     static Scanner sc = new Scanner(System.in);
+    static String nomeAplicacao;
 
     public static void main(String[] args) {
 
@@ -59,8 +60,10 @@ public class Cadastro {
                 cadastrarDev();
                 break;
             case 2:
+                cadastrarLinguagem();
                 break;
             case 3:
+
                 break;
             default:
                 break;
@@ -69,15 +72,35 @@ public class Cadastro {
     }
     static void cadastrarDev(){
         imprimeMensagem("********** CADASTRO DE DESENVOLVEDOR **********");
-        String nome = lerString("Digite o nome do DEV:");
-        String sobrenome = lerString("Digite o sobrenome do DEV:");
+        String nome = lerString("Digite o nome do DEV: ");
+        String sobrenome = lerString("Digite o sobrenome do DEV: ");
         String senioridade = lerString("Digite a senioridade: ");
         int idade = lerNumero("Digite a idade: ");
     }
 
     static void cadastrarLinguagem(){
+        imprimeMensagem("********** CADASTRO DE LINGUAGEM **********");
+        String nome = lerString("Digite o nome da linguagem: ");
+        String descricao = lerString("Digite a descrição da linguagem: ");
+
+        exibeOpcoes("aplicação","Front-end", "Back-end", "Mobile");
+        int aplicacao = lerOpcao("Digite a aplicação: ");
 
     }
+    static void exibeOpcoes(String cadeia1, String cadeia2, String cadeia3, String cadeia4){
+        System.out.println("Opções de " + cadeia1 + ": ");
+        System.out.println("1 - " + cadeia2);
+        System.out.println("2 - " + cadeia3);
+        System.out.println("3 - " + cadeia4);
+    }
+    static int lerOpcao(String mensagem){
+        int opcao;
+        do{
+            opcao = lerNumero(mensagem);
+        } while(!validaAplicacao(opcao));
+        return opcao;
+    }
+
     public static boolean validaNome(String nome) {
         boolean valida = true;
 
@@ -98,6 +121,26 @@ public class Cadastro {
             valida = false;
         } else {
             valida = true;
+        }
+        return valida;
+    }
+    public static boolean validaAplicacao(int aplicacao) {
+        boolean valida = true;
+
+        switch (aplicacao) {
+            case 1:
+                nomeAplicacao = "Front-end";
+                break;
+            case 2:
+                nomeAplicacao = "Back-end";
+                break;
+            case 3:
+                nomeAplicacao = "Mobile";
+                break;
+            default:
+                System.out.println("Opção inválida, tente novamente!");
+                valida = false;
+                break;
         }
         return valida;
     }
