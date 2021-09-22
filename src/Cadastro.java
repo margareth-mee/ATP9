@@ -11,28 +11,23 @@ import java.util.Scanner;
 
 public class Cadastro {
     static Scanner sc = new Scanner(System.in);
-    static String nomeAplicacao;
+    static String nomeAplicacao,nomeSenioridade;
 
     public static void main(String[] args) {
 
         imprimeCabecalho();
-        imprimeMenu();
+        exibeOpcoes("cadastro","Cadastrar dev","Cadastrar linguagem","Sair");
+
         int opcao = lerNumero("Digite uma opção: ");
         escolheMenu(opcao);
+
     }
-    static void imprimeMensagem(String mensagem){
-        System.out.println(mensagem);
-    }
+
     static void imprimeCabecalho(){
         System.out.println("********** CADASTRO DE APLICAÇÕES **********");
         System.out.println("\nOlá! Seja bem vindo(a) ao cadastro de aplicações!\n");
     }
-    static void imprimeMenu(){
-        System.out.println("Opções disponíveis: ");
-        System.out.println("1 - Cadastrar dev");
-        System.out.println("2 - Cadastrar linguagem");
-        System.out.println("3 - Sair");
-    }
+
     static int lerNumero(String mensagem){
         int numero;
 
@@ -63,45 +58,65 @@ public class Cadastro {
                 cadastrarLinguagem();
                 break;
             case 3:
-
+                System.out.println("Saindo... ");
                 break;
             default:
                 break;
         }
 
     }
+
     static void cadastrarDev(){
-        imprimeMensagem("********** CADASTRO DE DESENVOLVEDOR **********");
+        System.out.println("********** CADASTRO DE DESENVOLVEDOR **********");
         String nome = lerString("Digite o nome do DEV: ");
         String sobrenome = lerString("Digite o sobrenome do DEV: ");
-        String senioridade = lerString("Digite a senioridade: ");
+        exibeOpcoes("Senioridade", "Junior","Pleno","Senior");
+        String senioridade = lerOpcaoSenioridade("Digite a senioridade: ");
         int idade = lerNumero("Digite a idade: ");
+
+        System.out.println("DESENVOLVEDOR CADASTRADO!");
+        System.out.printf("\t == Usuario: %s \t == Sobrenome: %s \t == SENIORIDADE: %s \t == IDADE: %d",nome,sobrenome,senioridade,idade);
+
     }
 
     static void cadastrarLinguagem(){
-        imprimeMensagem("********** CADASTRO DE LINGUAGEM **********");
+        System.out.println("********** CADASTRO DE LINGUAGEM **********");
         String nome = lerString("Digite o nome da linguagem: ");
         String descricao = lerString("Digite a descrição da linguagem: ");
-
         exibeOpcoes("aplicação","Front-end", "Back-end", "Mobile");
-        int aplicacao = lerOpcao("Digite a aplicação: ");
+        String aplicacao = lerOpcaoAplicacao("Digite a aplicação: ");
+
+        System.out.println("LINGUAGEM CADASTRADA!");
+        System.out.printf("\t == NOME: %s \t == DESCRICAO: %s \t == APLICACAO: %s",nome,descricao,aplicacao);
 
     }
+
     static void exibeOpcoes(String cadeia1, String cadeia2, String cadeia3, String cadeia4){
         System.out.println("Opções de " + cadeia1 + ": ");
         System.out.println("1 - " + cadeia2);
         System.out.println("2 - " + cadeia3);
         System.out.println("3 - " + cadeia4);
     }
-    static int lerOpcao(String mensagem){
+
+    static String lerOpcaoAplicacao(String mensagem){
         int opcao;
         do{
             opcao = lerNumero(mensagem);
         } while(!validaAplicacao(opcao));
-        return opcao;
+        String aplicacao = nomeAplicacao;
+        return aplicacao;
     }
 
-    public static boolean validaNome(String nome) {
+    static String lerOpcaoSenioridade(String mensagem){
+        int opcao;
+        do{
+            opcao = lerNumero(mensagem);
+        } while(!validaSenioridade(opcao));
+        String senioridade = nomeSenioridade;
+        return senioridade;
+    }
+
+    static boolean validaNome(String nome) {
         boolean valida = true;
 
         if (nome.length() < 3) {
@@ -113,7 +128,7 @@ public class Cadastro {
         return valida;
     }
 
-    public static boolean validaNumero(int idade) {
+    static boolean validaNumero(int idade) {
         boolean valida = true;
 
         if (idade <= 0) {
@@ -124,7 +139,8 @@ public class Cadastro {
         }
         return valida;
     }
-    public static boolean validaAplicacao(int aplicacao) {
+
+    static boolean validaAplicacao(int aplicacao) {
         boolean valida = true;
 
         switch (aplicacao) {
@@ -145,4 +161,24 @@ public class Cadastro {
         return valida;
     }
 
+    static boolean validaSenioridade(int aplicacao) {
+        boolean valida = true;
+
+        switch (aplicacao) {
+            case 1:
+                nomeSenioridade = "Junior";
+                break;
+            case 2:
+                nomeSenioridade = "Pleno";
+                break;
+            case 3:
+                nomeSenioridade = "Senior";
+                break;
+            default:
+                System.out.println("Opção inválida, tente novamente!");
+                valida = false;
+                break;
+        }
+        return valida;
+    }
 }
