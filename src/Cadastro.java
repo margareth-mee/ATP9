@@ -10,12 +10,14 @@
 import java.util.Scanner;
 
 public class Cadastro {
+    static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         imprimeCabecalho();
         imprimeMenu();
         int opcao = lerNumero("Digite uma opção: ");
-
+        escolheMenu(opcao);
     }
     static void imprimeMensagem(String mensagem){
         System.out.println(mensagem);
@@ -31,14 +33,30 @@ public class Cadastro {
         System.out.println("3 - Sair");
     }
     static int lerNumero(String mensagem){
-        Scanner sc = new Scanner(System.in);
-        System.out.print(mensagem);
-        int numero = Integer.parseInt(sc.nextLine());
+        int numero;
+
+        do {
+            System.out.print(mensagem);
+            numero = Integer.parseInt(sc.nextLine());
+        } while (!validaNumero(numero));
+
         return numero;
     }
+
+    static String lerString(String mensagem){
+        String cadeia;
+        do{
+            System.out.print(mensagem);
+            cadeia = sc.nextLine();
+        } while (!validaNome(cadeia));
+
+        return cadeia;
+    }
+
     static void escolheMenu(int opcao){
         switch (opcao){
             case 1:
+                cadastrarDev();
                 break;
             case 2:
                 break;
@@ -49,11 +67,15 @@ public class Cadastro {
         }
 
     }
-    static void cadastraDev(){
-
+    static void cadastrarDev(){
+        imprimeMensagem("********** CADASTRO DE DESENVOLVEDOR **********");
+        String nome = lerString("Digite o nome do DEV:");
+        String sobrenome = lerString("Digite o sobrenome do DEV:");
+        String senioridade = lerString("Digite a senioridade: ");
+        int idade = lerNumero("Digite a idade: ");
     }
 
-    static void cadastraDev(){
+    static void cadastrarLinguagem(){
 
     }
     public static boolean validaNome(String nome) {
@@ -61,6 +83,18 @@ public class Cadastro {
 
         if (nome.length() < 3) {
             System.out.println("A palavra deve conter no mínimo 3 caracteres, tente novamente!");
+            valida = false;
+        } else {
+            valida = true;
+        }
+        return valida;
+    }
+
+    public static boolean validaNumero(int idade) {
+        boolean valida = true;
+
+        if (idade <= 0) {
+            System.out.println("O valor dever ser maior que zero, tente novamente!");
             valida = false;
         } else {
             valida = true;
