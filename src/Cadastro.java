@@ -11,16 +11,13 @@ import java.util.Scanner;
 
 public class Cadastro {
     static Scanner sc = new Scanner(System.in);
-    static String nomeAplicacao,nomeSenioridade;
+    static String nomeAplicacao, nomeSenioridade;
 
     public static void main(String[] args) {
 
         imprimeCabecalho();
         exibeOpcoes("cadastro","Cadastrar dev","Cadastrar linguagem","Sair");
-
-        int opcao = lerNumero("Digite uma opção: ");
-        escolheMenu(opcao);
-
+        lerOpcaoMenu("Digite uma opção: ");
     }
 
     static void imprimeCabecalho(){
@@ -31,10 +28,10 @@ public class Cadastro {
     static int lerNumero(String mensagem){
         int numero;
 
-        do {
+        do{
             System.out.print(mensagem);
             numero = Integer.parseInt(sc.nextLine());
-        } while (!validaNumero(numero));
+        }while (!validaNumero(numero));
 
         return numero;
     }
@@ -49,7 +46,9 @@ public class Cadastro {
         return cadeia;
     }
 
-    static void escolheMenu(int opcao){
+    static boolean escolheMenu(int opcao){
+        boolean valida = true;
+
         switch (opcao){
             case 1:
                 cadastrarDev();
@@ -61,9 +60,11 @@ public class Cadastro {
                 System.out.println("Saindo... ");
                 break;
             default:
+                System.out.println("Opção inválida!");
+                valida = false;
                 break;
         }
-
+        return valida;
     }
 
     static void cadastrarDev(){
@@ -96,6 +97,12 @@ public class Cadastro {
         System.out.println("1 - " + cadeia2);
         System.out.println("2 - " + cadeia3);
         System.out.println("3 - " + cadeia4);
+    }
+    static void lerOpcaoMenu(String mensagem){
+        int opcao;
+        do{
+            opcao = lerNumero(mensagem);
+        } while(!escolheMenu(opcao));
     }
 
     static String lerOpcaoAplicacao(String mensagem){
